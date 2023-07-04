@@ -1,0 +1,1 @@
+https://github.com/sashabaranov/go-openai
