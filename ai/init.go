@@ -7,7 +7,7 @@ import (
 	openai "github.com/sashabaranov/go-openai"
 )
 
-func Init(apiKey string) {
+func Init(apiKey string, question string) {
 	client := openai.NewClient(apiKey)
 	resp, err := client.CreateChatCompletion(
 		context.Background(),
@@ -16,7 +16,7 @@ func Init(apiKey string) {
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleUser,
-					Content: "Hello!",
+					Content: question,
 				},
 			},
 		},
