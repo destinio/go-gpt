@@ -1,13 +1,11 @@
 package ai
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 
+	"github.com/charmbracelet/glamour"
 	openai "github.com/sashabaranov/go-openai"
-	markdown "github.com/yuin/goldmark"
-	"github.com/yuin/goldmark/util"
 )
 
 func Init(apiKey string, question string) {
@@ -31,12 +29,11 @@ func Init(apiKey string, question string) {
 		return
 	}
 
-	// result := markdown.Render(resp.Choices[0].Message.Content, 80, 6)
-	var buf bytes.Buffer
+	out, err := glamour.Render(resp.Choices[0].Message.Content, "dark")
 
-	if err := markdown.Convert(util.StringToReadOnlyBytes(resp.Choices[0].Message.Content), &buf); err != nil {
+	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(buf.String())
+	fmt.Print(out)
 }
